@@ -1,12 +1,16 @@
+
+const int NONE = -1;
+const int CLOSED = 0;
+const int OPENED  = 1;
 int trigger_pin = 2;
 
 int echo_pin = 3;
 
-int buzzer_pin = 10; 
-
 int time;
 
-int distance; 
+int distance;
+
+int door_status = NONE;
 
 
 
@@ -18,12 +22,6 @@ void setup ( ) {
         pinMode (trigger_pin, OUTPUT); 
 
         pinMode (echo_pin, INPUT);
-
-        pinMode (buzzer_pin, OUTPUT);
-
-
-
-
 }
 
 
@@ -41,34 +39,27 @@ void loop ( ) {
 
     distance = (time * 0.034) / 2;
 
-    
+  if (distance <= 20) 
+  {
 
-  if (distance <= 10) 
-
-        {
-
-        Serial.println (" Door Open ");
-
-        Serial.print (" Distance= ");              
-
-        Serial.println (distance);        
-
-        digitalWrite (buzzer_pin, HIGH);
-
+        if (door_status == NONE)
+            door_status = OPENED;
+        else if (door_status == CLOSED){
+                  Serial.println (1); 
+                  door_status = OPENED;
+          }    
         delay (500);
 
-        }
+  }
 
   else {
 
-        Serial.println (" Door closed ");
-
-        Serial.print (" Distance= ");              
-
-        Serial.println (distance);        
-
-        digitalWrite (buzzer_pin, LOW);
-
+        if (door_status == NONE)
+            door_status = CLOSED;
+        else if (door_status == OPENED) {
+                  Serial.println (0); 
+                  door_status = CLOSED;
+        }       
         delay (500);        
 
   } 
