@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signal.Handler", "Signal.Handler\Signal.Handler.csproj", "{153C2197-894C-4CE6-B0C6-61FBD4DE7550}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signal.Server", "Signal.Server\Signal.Server.csproj", "{9B12C152-1F3C-40E0-9C16-26D358F202A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{153C2197-894C-4CE6-B0C6-61FBD4DE7550}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{153C2197-894C-4CE6-B0C6-61FBD4DE7550}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{153C2197-894C-4CE6-B0C6-61FBD4DE7550}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B12C152-1F3C-40E0-9C16-26D358F202A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B12C152-1F3C-40E0-9C16-26D358F202A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B12C152-1F3C-40E0-9C16-26D358F202A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B12C152-1F3C-40E0-9C16-26D358F202A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
