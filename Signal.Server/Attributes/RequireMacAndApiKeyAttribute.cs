@@ -33,7 +33,7 @@ public class RequireMacAndApiKeyAttribute: Attribute, IAsyncActionFilter
         var dbContext = context.HttpContext.RequestServices.GetRequiredService<ApplicationDbContext>();
         var sensor =
             await dbContext.AuthorizedSensors.FirstOrDefaultAsync(s =>
-                s.ApiKey == extractedApiKey && s.MAC == extractedMac);
+                s.ApiKey == extractedApiKey.ToString() && s.MAC == extractedMac.ToString());
         
         if (sensor is null)
         {
