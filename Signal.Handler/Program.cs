@@ -10,6 +10,8 @@ IConfiguration config = new ConfigurationBuilder()
 
 var serialPortOptions = new SerialPortOptions();
 config.Bind(nameof(SerialPortOptions), serialPortOptions);
+var sensorInfoOptions = new SensorInfoOptions();
+config.Bind(nameof(SensorInfoOptions), sensorInfoOptions);
 var serialPort = new SerialPort(serialPortOptions.PortName, serialPortOptions.BaudRate);
 serialPort.Open();
 
@@ -29,10 +31,12 @@ while (true)
         switch (status.Trim())
         {
             case "0":
-                Console.WriteLine("Door closed!");
+                Console.WriteLine("Door opened!");
+                await ServerService.NotifyServerAsync(sensorInfoOptions, DoorStatus.Closed);
                 break;
             case "1":
-                Console.WriteLine("Door opened!");
+                Console.WriteLine("Door closed!");
+                await ServerService.NotifyServerAsync(sensorInfoOptions, DoorStatus.Opened);
                 break;
         }
     }

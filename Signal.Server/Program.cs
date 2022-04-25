@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Signal.Server.Database;
+using Signal.Server.Services;
+using Signal.Server.Services.Contracts;
+using Signal.Server.Services.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +11,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("SignalServer")));
-
+builder.Services.Configure<SendgridOptions>(
+        builder.Configuration.GetSection(nameof(SendgridOptions)));
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddLogging();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
