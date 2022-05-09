@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Signal.Server.Database;
 using Signal.Server.Models;
 
 namespace Signal.Server.Controllers;
@@ -7,15 +9,18 @@ namespace Signal.Server.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly ApplicationDbContext _dbContext;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
     {
         _logger = logger;
+        _dbContext = dbContext;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var entries = await _dbContext.SensorStatusTracks.Include(p => p.Sensor).OrderByDescending(p => p.CreatedTimeUtc).ToListAsync();
+        return View(entries);
     }
 
     public IActionResult Privacy()
